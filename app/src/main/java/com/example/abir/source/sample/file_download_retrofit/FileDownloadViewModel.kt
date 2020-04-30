@@ -32,6 +32,10 @@ class FileDownloadViewModel(private val mApplication: Application) :
         MutableLiveData<Int>()
     }
 
+    val filePathLiveData: MutableLiveData<File> by lazy {
+        MutableLiveData<File>()
+    }
+
     private val imageFile: File by lazy {
         val externalDirectory = mApplication.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
         return@lazy File(externalDirectory, DOWNLOADABLE_FILE_IMAGE)
@@ -61,6 +65,7 @@ class FileDownloadViewModel(private val mApplication: Application) :
             val isSuccessful = writeResponseBodyToDisk(mBody)
             if (isSuccessful) {
                 "File stored successfully".logVerbose(TAG)
+                filePathLiveData.postValue(imageFile)
             } else {
                 "File wasn't stored".logError(TAG)
             }
