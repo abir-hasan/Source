@@ -34,11 +34,17 @@ class FileDownloadActivity : AppCompatActivity() {
     }
 
     private fun onImageStoreSuccess(it: File) {
-        Picasso.get().load(it).into(ivDownloadedImage)
+        Picasso.get().load(it).placeholder(R.drawable.ic_launcher_background).into(ivDownloadedImage)
+        tvStatus.text = "Image loaded"
     }
 
     private fun onProgress(it: Int) {
         "onProgress() called $it".logDebug(TAG)
+        if (it < 100) {
+            tvStatus.text = "Storing the image... Completion($it%)"
+        } else {
+            tvStatus.text = "Stored Successfully"
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             progressDownload.setProgress(it, true)
         } else {
