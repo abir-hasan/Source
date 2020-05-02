@@ -34,7 +34,8 @@ class FileDownloadActivity : AppCompatActivity() {
     }
 
     private fun onImageStoreSuccess(it: File) {
-        Picasso.get().load(it).placeholder(R.drawable.ic_launcher_background).into(ivDownloadedImage)
+        Picasso.get().load(it).placeholder(R.drawable.ic_launcher_background)
+            .into(ivDownloadedImage)
         tvStatus.text = "Image loaded"
     }
 

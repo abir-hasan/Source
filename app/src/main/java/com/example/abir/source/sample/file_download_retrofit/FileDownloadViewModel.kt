@@ -4,7 +4,6 @@ import android.app.Application
 import android.media.MediaScannerConnection
 import android.os.Environment
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.abir.source.utils.logDebug
