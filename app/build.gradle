@@ -37,6 +37,12 @@ android {
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
+    repositories {
+        mavenCentral()
+        maven() {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+    }
 }
 
 dependencies {
@@ -71,6 +77,11 @@ dependencies {
 
     // EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // Added for package 'guided_tutorial'
+    implementation('com.github.worker8:tourguide:2.0.0-SNAPSHOT@aar') {
+        transitive = true
+    }
 
     // Tests
     testImplementation 'junit:junit:4.12'

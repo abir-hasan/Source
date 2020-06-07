@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
+import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,6 +12,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setButton1()
+        setButton2()
+    }
+
+    private fun setButton2() {
+        button2.setOnClickListener {
+            Intent(this, GuideActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 
     private fun setButton1() {
