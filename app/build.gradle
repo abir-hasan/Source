@@ -38,7 +38,9 @@ android {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
     repositories {
+        // Added for package 'guided_tutorial'
         mavenCentral()
+        // Added for package 'guided_tutorial'
         maven() {
             url "https://oss.sonatype.org/content/repositories/snapshots"
         }
