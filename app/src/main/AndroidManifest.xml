@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".sample.file_download_retrofit.FileDownloadActivity" />
-        <activity android:name=".sample.guided_tutorial.GuideActivity"/>
+        <activity android:name=".sample.guided_tutorial.GuideActivity" />
+        <activity android:name=".sample.guided_tutorial.GuideInSideListActivity"/>
     </application>
 
 </manifest>

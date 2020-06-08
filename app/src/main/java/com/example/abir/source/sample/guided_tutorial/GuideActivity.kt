@@ -1,11 +1,13 @@
 package com.example.abir.source.sample.guided_tutorial
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import com.example.abir.source.R
+import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import kotlinx.android.synthetic.main.activity_guide.*
 import tourguide.tourguide.Pointer
 import tourguide.tourguide.TourGuide
@@ -89,7 +91,12 @@ class GuideActivity : AppCompatActivity() {
         }
 
         /* setup 3rd button, when clicked, run cleanUp() */
-        btnThree.setOnClickListener { tourGuide.cleanUp() }
+        btnThree.setOnClickListener {
+            tourGuide.cleanUp()
+            Intent(this, GuideInSideListActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 
 
