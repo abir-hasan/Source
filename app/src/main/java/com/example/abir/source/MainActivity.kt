@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     /**
      *  Exploring TourGuide Library for Showcasing
      *  @link - https://github.com/worker8/TourGuide
+     *  Also Check out below which supports custom view and has good API
+     *  @link - https://github.com/faruktoptas/FancyShowCaseView
      */
     private fun setButton2() {
         button2.setOnClickListener {
