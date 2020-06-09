@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity() {
         setButton2()
     }
 
+    /**
+     *  Exploring TourGuide Library for Showcasing
+     *  @link - https://github.com/worker8/TourGuide
+     */
     private fun setButton2() {
         button2.setOnClickListener {
             Intent(this, GuideActivity::class.java).apply {
