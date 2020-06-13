@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".sample.property_animation.PropertyAnimationActivity">
 
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/BlanchedAlmond" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
