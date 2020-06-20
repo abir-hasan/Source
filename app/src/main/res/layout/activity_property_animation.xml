@@ -16,4 +16,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/BlanchedAlmond" />
 
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click Here"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/BlanchedAlmond" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
