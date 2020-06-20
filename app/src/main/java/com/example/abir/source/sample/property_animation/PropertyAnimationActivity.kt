@@ -1,14 +1,14 @@
 package com.example.abir.source.sample.property_animation
 
+import android.animation.Animator
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.BounceInterpolator
-import android.view.animation.LinearInterpolator
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.abir.source.R
+import com.example.abir.source.utils.logDebug
 import kotlinx.android.synthetic.main.activity_property_animation.*
 
 
@@ -19,20 +19,123 @@ import kotlinx.android.synthetic.main.activity_property_animation.*
  * whether to reverse it and for how many times we want to repeat the animation etc
  */
 class PropertyAnimationActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "PropertyAnimation"
+        private const val SEARCH_ANIMATION_DURATION = 1000L
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_animation)
 
-        btn1.setOnClickListener {
-            Toast.makeText(this, "Clicked 1", Toast.LENGTH_SHORT).show()
-        }
+        btn1.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
+        btn2.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
 
-        btn2.setOnClickListener {
-            Toast.makeText(this, "Clicked 2", Toast.LENGTH_SHORT).show()
-        }
+        ivSearch.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
+        ivCancel.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
+        etSearch.isClickable = false
+        etSearch.isFocusable = false
+        ivCancel.isClickable = false
+        ivCancel.isFocusable = false
 
         propertyAnimationWithValueAnimator()
         propertyAnimationWithObjectAnimator()
+    }
+
+    /**
+     * Show search option when search buttons is clicked with follwing animations
+     * Search icon will go from right to start of the screen
+     * Edit text will fade in
+     * Cancel icon will fade in
+     */
+    private fun multiplePropertyAnimationsOnShowSearch() {
+        val displayMetrics = resources.displayMetrics
+        val pixelsToGoLeft = (-(displayMetrics.widthPixels - ivSearch.width)).toFloat()
+
+        val searchIconLeftAnimation =
+            ObjectAnimator.ofFloat(ivSearch, "translationX", pixelsToGoLeft)
+        searchIconLeftAnimation.duration = SEARCH_ANIMATION_DURATION
+
+        val editTextFadeInAnimation =
+            ObjectAnimator.ofFloat(etSearch, "alpha", 0f, 1f)
+        editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
+
+        val cancelIconFadeInAnimation =
+            ObjectAnimator.ofFloat(ivCancel, "alpha", 0f, 1f)
+        editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
+
+        val animatorSet = AnimatorSet()
+        animatorSet.play(searchIconLeftAnimation).with(editTextFadeInAnimation)
+        animatorSet.play(searchIconLeftAnimation).with(cancelIconFadeInAnimation)
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                "onAnimationEnd()".logDebug(TAG)
+                etSearch.isClickable = true
+                etSearch.isFocusableInTouchMode = true
+                ivCancel.isClickable = true
+                ivCancel.isFocusable = true
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+        })
+        animatorSet.start()
+
+    }
+
+    /**
+     * Reverse animation of [multiplePropertyAnimationsOnShowSearch]
+     */
+    private fun multiplePropertyAnimationsOnHideSearch() {
+        val searchIconLeftAnimation =
+            ObjectAnimator.ofFloat(ivSearch, "translationX", 0f)
+        searchIconLeftAnimation.duration = SEARCH_ANIMATION_DURATION
+
+        val editTextFadeInAnimation =
+            ObjectAnimator.ofFloat(etSearch, "alpha", 1f, 0f)
+        editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
+
+        val cancelIconFadeInAnimation =
+            ObjectAnimator.ofFloat(ivCancel, "alpha", 1f, 0f)
+        editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
+
+        val animatorSet = AnimatorSet()
+        animatorSet.play(searchIconLeftAnimation).with(editTextFadeInAnimation)
+        animatorSet.play(searchIconLeftAnimation).with(cancelIconFadeInAnimation)
+
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                etSearch.isClickable = false
+                etSearch.isFocusable = false
+                ivCancel.isClickable = false
+                ivCancel.isFocusable = false
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+        })
+        animatorSet.start()
     }
 
     /**
@@ -44,7 +147,7 @@ class PropertyAnimationActivity : AppCompatActivity() {
             btn2, "translationY", 0f, -500f
         )
         objectAnimator.duration = 2000
-        objectAnimator.interpolator = BounceInterpolator()
+        objectAnimator.interpolator = AccelerateDecelerateInterpolator()
         objectAnimator.start()
     }
 
