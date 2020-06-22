@@ -17,6 +17,15 @@ import kotlinx.android.synthetic.main.activity_property_animation.*
  * We specify certain properties(like translateX, TextScaleX) of the objects to change.
  * Various characteristics of animation which can be manipulated are animation duration,
  * whether to reverse it and for how many times we want to repeat the animation etc
+ *
+ * Properties to be animated:-
+ * translationX, translationY
+ * rotation, rotationX, rotationY
+ * scaleX, scaleY
+ * pivotX, pivotY
+ * alpha
+ * x, y [These are simple utility properties to describe the final location of the View
+ * in its container, as a sum of the left and top values and translationX and translationY values.]
  */
 class PropertyAnimationActivity : AppCompatActivity() {
 
@@ -28,6 +37,8 @@ class PropertyAnimationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_animation)
+
+        tvHello.setOnClickListener { multiplePropertyAnimationsOnSingleView() }
 
         btn1.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
         btn2.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
@@ -41,6 +52,65 @@ class PropertyAnimationActivity : AppCompatActivity() {
 
         propertyAnimationWithValueAnimator()
         propertyAnimationWithObjectAnimator()
+    }
+
+    /**
+     * Perform Multiple Animations on a single View
+     * Note: Animation always takes the Views First Setup point as (0,0)
+     */
+    private fun multiplePropertyAnimationsOnSingleView() {
+        val displayMetrics = resources.displayMetrics
+
+        val positionOnScreen = IntArray(2)
+        tvHello.getLocationOnScreen(positionOnScreen)
+        val currentXPositionOnScreen = positionOnScreen[0]
+
+        val bringToCenterPosition = 0f
+        val pixelsToGoLeft = (-currentXPositionOnScreen).toFloat()
+        val pixelsToGoRight =
+            (displayMetrics.widthPixels - currentXPositionOnScreen - tvHello.width).toFloat()
+
+        val goLeftAnimation = ObjectAnimator.ofFloat(tvHello, "translationX", pixelsToGoLeft)
+        goLeftAnimation.duration = 3000
+
+        val scaleUpAnimation = ObjectAnimator.ofFloat(tvHello, "scaleX", 1.5f)
+        scaleUpAnimation.duration = 2500
+
+        val scaleBackAnimation = ObjectAnimator.ofFloat(tvHello, "scaleX", 1f)
+        scaleBackAnimation.duration = 1000
+
+        val goRightAnimation = ObjectAnimator.ofFloat(tvHello, "translationX", pixelsToGoRight)
+        goRightAnimation.startDelay = 500
+        goRightAnimation.duration = 3000
+
+        val rightRotateAnimation = ObjectAnimator.ofFloat(tvHello, "rotation", 360f)
+        rightRotateAnimation.startDelay = 500
+        rightRotateAnimation.repeatCount = 5
+        goRightAnimation.duration = 3000
+
+        val bringToCenterAnimation =
+            ObjectAnimator.ofFloat(tvHello, "translationX", bringToCenterPosition)
+        bringToCenterAnimation.startDelay = 500
+        bringToCenterAnimation.duration = 2000
+
+        // Go Right and Rotate
+        val animatorSet2 = AnimatorSet()
+        animatorSet2.play(goRightAnimation).with(rightRotateAnimation)
+
+        // Go Left and Scale
+        val animatorSet1 = AnimatorSet()
+        animatorSet1.playTogether(scaleUpAnimation, goLeftAnimation)
+
+
+        // Main Animation Timeline
+        val animatorSet = AnimatorSet()
+        animatorSet.playSequentially(
+            animatorSet1,
+            animatorSet2,
+            bringToCenterAnimation,
+            scaleBackAnimation
+        )
+        animatorSet.start()
     }
 
     /**
