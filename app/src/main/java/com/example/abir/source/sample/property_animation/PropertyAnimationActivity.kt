@@ -55,6 +55,31 @@ class PropertyAnimationActivity : AppCompatActivity() {
     }
 
     /**
+     * Same animation as [propertyAnimationWithValueAnimator] just using the ObjectAnimator Subclass
+     * Also on a different view with a few different parameters
+     */
+    private fun propertyAnimationWithObjectAnimator() {
+        val objectAnimator: ObjectAnimator = ObjectAnimator.ofFloat(
+            btn2, "translationY", 0f, -500f
+        )
+        objectAnimator.duration = 2000
+        objectAnimator.interpolator = AccelerateDecelerateInterpolator()
+        objectAnimator.start()
+    }
+
+    private fun propertyAnimationWithValueAnimator() {
+        val valueAnimator: ValueAnimator = ValueAnimator.ofFloat(0f, 500f)
+        valueAnimator.interpolator =
+            AccelerateDecelerateInterpolator() // increase the speed first and then decrease
+
+        valueAnimator.duration = 2000
+        valueAnimator.addUpdateListener { animation ->
+            btn1.translationY = animation.animatedValue.toString().toFloat()
+        }
+        valueAnimator.start()
+    }
+
+    /**
      * Perform Multiple Animations on a single View
      * Note: Animation always takes the Views First Setup point as (0,0)
      */
@@ -206,30 +231,5 @@ class PropertyAnimationActivity : AppCompatActivity() {
 
         })
         animatorSet.start()
-    }
-
-    /**
-     * Same animation as [propertyAnimationWithValueAnimator] just using the ObjectAnimator Subclass
-     * Also on a different view with a few different parameters
-     */
-    private fun propertyAnimationWithObjectAnimator() {
-        val objectAnimator: ObjectAnimator = ObjectAnimator.ofFloat(
-            btn2, "translationY", 0f, -500f
-        )
-        objectAnimator.duration = 2000
-        objectAnimator.interpolator = AccelerateDecelerateInterpolator()
-        objectAnimator.start()
-    }
-
-    private fun propertyAnimationWithValueAnimator() {
-        val valueAnimator: ValueAnimator = ValueAnimator.ofFloat(0f, 500f)
-        valueAnimator.interpolator =
-            AccelerateDecelerateInterpolator() // increase the speed first and then decrease
-
-        valueAnimator.duration = 2000
-        valueAnimator.addUpdateListener { animation ->
-            btn1.translationY = animation.animatedValue.toString().toFloat()
-        }
-        valueAnimator.start()
     }
 }
