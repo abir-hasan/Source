@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
+import com.example.abir.source.sample.dialog.CardDialog
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
@@ -17,14 +18,7 @@ class MainActivity : AppCompatActivity() {
         setButton2()
         setButton3()
         setButton4()
-    }
-
-    private fun setButton4() {
-        button4.setOnClickListener {
-            Intent(this, CustomTextSampleActivity::class.java).apply {
-                startActivity(this)
-            }
-        }
+        setButton5()
     }
 
     private fun setButton1() {
@@ -54,6 +48,30 @@ class MainActivity : AppCompatActivity() {
             Intent(this, PropertyAnimationActivity::class.java).apply {
                 startActivity(this)
             }
+        }
+    }
+
+    private fun setButton4() {
+        button4.setOnClickListener {
+            Intent(this, CustomTextSampleActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+    }
+
+    private fun setButton5() {
+        button5.setOnClickListener {
+            val message = "Custom Title Text"
+            val buttonText = "Okay"
+            val fragment = CardDialog(
+                titleText = message,
+                buttonText = buttonText,
+                cardIcon = R.drawable.ic_smiley_face,
+                onCrossClick = null,
+                onButtonClick = null
+            )
+            fragment.isCancelable = false
+            fragment.show(supportFragmentManager, "tag")
         }
     }
 }
