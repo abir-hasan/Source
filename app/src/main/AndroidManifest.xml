@@ -21,8 +21,8 @@
         <activity android:name=".sample.file_download_retrofit.FileDownloadActivity" />
         <activity android:name=".sample.guided_tutorial.GuideActivity" />
         <activity android:name=".sample.guided_tutorial.GuideInSideListActivity" />
-        <activity
-            android:name=".sample.property_animation.PropertyAnimationActivity"/>
+        <activity android:name=".sample.property_animation.PropertyAnimationActivity" />
+        <activity android:name=".sample.custom_text.CustomTextSampleActivity"/>
     </application>
 
 </manifest>
