@@ -2,15 +2,24 @@ package com.example.abir.source
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
 import com.example.abir.source.sample.dialog.CardDialog
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
+import com.example.abir.source.utils.logDebug
+import com.example.abir.source.utils.logInfo
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setButton3()
         setButton4()
         setButton5()
+        setButton6()
     }
 
     private fun setButton1() {
@@ -72,6 +82,19 @@ class MainActivity : AppCompatActivity() {
             )
             fragment.isCancelable = false
             fragment.show(supportFragmentManager, "tag")
+        }
+    }
+
+    /**
+     * Check AES Encryption - Basic Implementation
+     */
+    private fun setButton6() {
+        button6.setOnClickListener {
+            val encryptedMessage = AESEncryption().encryptMessage("01533337777")
+            "onCreate() encrypted message: $encryptedMessage".logDebug(TAG)
+            "onCreate() Decrypted message: ${AESEncryption().decryptMessage(encryptedMessage)}"
+                .logInfo(TAG)
+            Toast.makeText(this, "Check LOG_CAT", Toast.LENGTH_SHORT).show()
         }
     }
 }
