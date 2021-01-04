@@ -1,7 +1,9 @@
 package com.example.abir.source.sample.save_file_on_shared_storage
 
 import android.app.Application
+import android.content.ContentUris
 import android.content.ContentValues
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -11,7 +13,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.abir.source.utils.logDebug
+import com.example.abir.source.utils.logError
 import com.example.abir.source.utils.logInfo
+import com.example.abir.source.utils.logVerbose
 import com.example.abir.source.utils.model.APIResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,10 +27,11 @@ import retrofit2.Retrofit
 import java.io.File
 import java.io.OutputStream
 
+
 class DownloadAndSaveFileViewModel(val mApplication: Application) : AndroidViewModel(mApplication) {
 
     companion object {
-        const val TAG = "FileDownloadViewModel"
+        const val TAG = "DownloadAndSaveFileVM"
         const val DOWNLOADABLE_FILE_NAME_PDF = "test_pdf_file.pdf"
         const val DOWNLOADABLE_FILE_MIME_TYPE_PDF = "application/pdf"
     }
@@ -105,10 +110,44 @@ class DownloadAndSaveFileViewModel(val mApplication: Application) : AndroidViewM
                 outputStream.write(mBody.bytes())
                 outputStream.close()
                 fileUriLiveData.postValue(APIResponse.success(uri))
-                "writeFileToPublicExternalStorage() File Saved on External Storage: $uri".logInfo(TAG)
+                "writeFileToPublicExternalStorage() File Saved on External Storage: $uri".logInfo(
+                    TAG
+                )
             } catch (e: Exception) {
                 fileUriLiveData.postValue(APIResponse.error(null, ""))
                 e.printStackTrace()
             }
         }
+
+
+    fun checkIfPdfFileExist(): Boolean {
+        val contentUri = MediaStore.Files.getContentUri("external")
+
+        // val selection = MediaStore.MediaColumns.RELATIVE_PATH + "=?"
+
+        // val selectionArgs = arrayOf("DCIM/Folder-1")
+
+        val cursor: Cursor? =
+            mApplication.contentResolver.query(
+                contentUri, null, null, null, null
+            )
+        cursor?.let {
+            if (it.count == 0) return false
+            var uri: Uri? = null
+            while (it.moveToNext()) {
+                val fileName = it.getString(it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+                "checkIfPdfFileExist() fileName: $fileName".logVerbose(TAG)
+                if (fileName == DOWNLOADABLE_FILE_NAME_PDF) {
+                    val id = cursor.getLong(it.getColumnIndex(MediaStore.MediaColumns._ID))
+                    uri = ContentUris.withAppendedId(contentUri, id)
+                    break
+                }
+            }
+            it.close()
+            return uri != null
+        } ?: run {
+            "checkIfPdfFileExist() Cursor Null".logError(TAG)
+            return false
+        }
+    }
 }

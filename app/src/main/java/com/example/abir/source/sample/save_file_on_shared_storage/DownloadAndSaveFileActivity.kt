@@ -37,6 +37,8 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_download_and_save_file)
         initView()
         setupObservers()
+        // TODO - Take Runtime Permission
+        //  for API 21-28 @see https://developer.android.com/training/data-storage
         getPdfFile()
     }
 
