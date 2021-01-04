@@ -10,6 +10,7 @@ import com.example.abir.source.sample.dialog.CardDialog
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
+import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logInfo
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setButton4()
         setButton5()
         setButton6()
+        setButton7()
     }
 
     private fun setButton1() {
@@ -95,6 +97,14 @@ class MainActivity : AppCompatActivity() {
             "onCreate() Decrypted message: ${AESEncryption().decryptMessage(encryptedMessage)}"
                 .logInfo(TAG)
             Toast.makeText(this, "Check LOG_CAT", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setButton7() {
+        button7.setOnClickListener {
+            Intent(this, DownloadAndSaveFileActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 }

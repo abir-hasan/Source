@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Source</string>
     <string name="list_of_examples">List Of Examples</string>
+    <string name="success">Success</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="downloading">Downloading</string>
+    <string name="open_file">Open File</string>
+    <string name="no_uri">No URI!!</string>
 </resources>
