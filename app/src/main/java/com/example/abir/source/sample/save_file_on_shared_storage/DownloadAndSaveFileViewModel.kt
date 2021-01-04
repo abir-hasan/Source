@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -26,7 +27,7 @@ class DownloadAndSaveFileViewModel(val mApplication: Application) : AndroidViewM
 
     companion object {
         const val TAG = "FileDownloadViewModel"
-        const val DOWNLOADABLE_FILE_NAME_PDF = "TEST_DRIVE_FILE.pdf"
+        const val DOWNLOADABLE_FILE_NAME_PDF = "test_pdf_file.pdf"
         const val DOWNLOADABLE_FILE_MIME_TYPE_PDF = "application/pdf"
     }
 
@@ -91,7 +92,11 @@ class DownloadAndSaveFileViewModel(val mApplication: Application) : AndroidViewM
                             Environment.DIRECTORY_DOWNLOADS
                         ), DOWNLOADABLE_FILE_NAME_PDF
                     )
-                    uri = Uri.fromFile(file)
+                    uri = FileProvider.getUriForFile(
+                        mApplication,
+                        mApplication.applicationContext.packageName + ".provider",
+                        file
+                    )
                 }
 
                 val outputStream: OutputStream = mApplication.contentResolver.openOutputStream(
@@ -100,7 +105,7 @@ class DownloadAndSaveFileViewModel(val mApplication: Application) : AndroidViewM
                 outputStream.write(mBody.bytes())
                 outputStream.close()
                 fileUriLiveData.postValue(APIResponse.success(uri))
-                "writeFileToPublicExternalStorage() File Saved on External Storage".logInfo(TAG)
+                "writeFileToPublicExternalStorage() File Saved on External Storage: $uri".logInfo(TAG)
             } catch (e: Exception) {
                 fileUriLiveData.postValue(APIResponse.error(null, ""))
                 e.printStackTrace()

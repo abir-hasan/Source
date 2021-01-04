@@ -30,6 +30,15 @@
         <activity android:name=".sample.property_animation.PropertyAnimationActivity" />
         <activity android:name=".sample.custom_text.CustomTextSampleActivity" />
         <activity android:name=".sample.save_file_on_shared_storage.DownloadAndSaveFileActivity" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

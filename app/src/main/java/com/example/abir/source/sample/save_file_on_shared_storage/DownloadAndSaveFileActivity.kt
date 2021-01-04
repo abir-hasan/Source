@@ -59,15 +59,11 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
      */
     private fun openFileForAndroidTenAndBelow(filePathUri: Uri) {
         "openFileForAndroidTenAndBelow() called with: filePathUri = $filePathUri".logDebug(TAG)
-        val target = Intent(Intent.ACTION_VIEW).apply {
+        Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(
                 filePathUri,
                 DownloadAndSaveFileViewModel.DOWNLOADABLE_FILE_MIME_TYPE_PDF
             )
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        Intent.createChooser(target, getString(R.string.open_file)).apply {
             setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             startActivity(this)
