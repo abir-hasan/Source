@@ -73,6 +73,9 @@ class DownloadAndSaveFileViewModel(val mApplication: Application) : AndroidViewM
      * But we are setting 'requestLegacyExternalStorage' to true in manifest to make Android Q/10
      * work similar to Android Pie/9 or below
      * And for Android R/11 and above we are taking a different approach to save file
+     *
+     * @sample filePathUri = content://com.example.abir.source.provider/external_files/Download/test_pdf_file.pdf
+     * @sample filePathUri = file:///storage/emulated/0/Download/test_pdf_file.pdf
      */
     private suspend fun writeFileToPublicExternalStorage(mBody: ResponseBody) =
         withContext(Dispatchers.IO) {

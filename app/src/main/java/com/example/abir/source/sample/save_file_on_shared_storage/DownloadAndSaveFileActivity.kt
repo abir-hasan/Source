@@ -48,18 +48,11 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.no_uri), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                openFileForAndroidElevenAndAbove(filePathUri!!)
-            } else {
-                openFileForAndroidTenAndBelow(filePathUri!!)
-            }
+            openFile(filePathUri!!)
         }
     }
 
-    /**
-     * Android Q/10 and below
-     */
-    private fun openFileForAndroidTenAndBelow(filePathUri: Uri) {
+    private fun openFile(filePathUri: Uri) {
         "openFileForAndroidTenAndBelow() called with: filePathUri = $filePathUri".logDebug(TAG)
         Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(
@@ -72,11 +65,9 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Android R/11 and above
-     */
+
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun openFileForAndroidElevenAndAbove(filePathUri: Uri) {
+    private fun openFileLocation(filePathUri: Uri) {
         "openFileForAndroidElevenAndAbove() called with: filePathUri = $filePathUri".logDebug(TAG)
         Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
