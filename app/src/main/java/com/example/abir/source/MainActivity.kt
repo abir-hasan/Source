@@ -9,11 +9,14 @@ import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
 import com.example.abir.source.sample.dialog.CardDialog
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
+import com.example.abir.source.sample.jwt_token_example.JWTSample
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logInfo
+import com.example.abir.source.utils.showSnackBarShort
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         setButton5()
         setButton6()
         setButton7()
+        setButton8()
     }
 
     private fun setButton1() {
@@ -105,6 +109,17 @@ class MainActivity : AppCompatActivity() {
             Intent(this, DownloadAndSaveFileActivity::class.java).apply {
                 startActivity(this)
             }
+        }
+    }
+
+    private fun setButton8() {
+        button8.setOnClickListener {
+            val jwtSampleObject = JWTSample()
+            val encryptedMessage = jwtSampleObject.encryptMessage("01533337777")
+            "setButton8() JWT encrypted message: $encryptedMessage".logDebug(TAG)
+            "setButton8() JWT Decrypted message: ${jwtSampleObject.decryptMessage(encryptedMessage)}"
+                .logInfo(TAG)
+            showSnackBarShort("Check LOG_CAT: JWT")
         }
     }
 }

@@ -42,7 +42,7 @@ class FileDownloadViewModel(private val mApplication: Application) :
 
     private val mRetrofit: Retrofit by lazy {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.HEADERS
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val builder = OkHttpClient.Builder()
         builder.addInterceptor(interceptor)
