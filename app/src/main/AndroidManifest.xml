@@ -30,6 +30,11 @@
         <activity android:name=".sample.property_animation.PropertyAnimationActivity" />
         <activity android:name=".sample.custom_text.CustomTextSampleActivity" />
         <activity android:name=".sample.save_file_on_shared_storage.DownloadAndSaveFileActivity" />
+        <activity
+            android:name=".sample.video_web_view.VideoWebViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

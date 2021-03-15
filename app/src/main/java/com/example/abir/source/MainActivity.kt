@@ -12,6 +12,7 @@ import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.jwt_token_example.JWTSample
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
+import com.example.abir.source.sample.video_web_view.VideoWebViewActivity
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logInfo
 import com.example.abir.source.utils.showSnackBarShort
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setButton6()
         setButton7()
         setButton8()
+        setButton9()
     }
 
     private fun setButton1() {
@@ -120,6 +122,14 @@ class MainActivity : AppCompatActivity() {
             "setButton8() JWT Decrypted message: ${jwtSampleObject.decryptMessage(encryptedMessage)}"
                 .logInfo(TAG)
             showSnackBarShort("Check LOG_CAT: JWT")
+        }
+    }
+
+    private fun setButton9() {
+        button1.setOnClickListener {
+            Intent(this, VideoWebViewActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 }
