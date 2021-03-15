@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
 import com.example.abir.source.sample.dialog.CardDialog
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         setButton7()
         setButton8()
         setButton9()
+        setButton10()
     }
 
     private fun setButton1() {
@@ -126,10 +128,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setButton9() {
-        button1.setOnClickListener {
+        button9.setOnClickListener {
             Intent(this, VideoWebViewActivity::class.java).apply {
                 startActivity(this)
             }
+        }
+    }
+
+    private fun setButton10() {
+        button10.setOnClickListener {
+            prepareCustomTab("https://stackoverflow.com")
         }
     }
 }
