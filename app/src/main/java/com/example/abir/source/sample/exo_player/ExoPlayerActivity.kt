@@ -111,6 +111,9 @@ class ExoPlayerActivity : AppCompatActivity() {
         val mediaItem = MediaItem.fromUri(getString(VIDEO_URL))
         player?.setMediaItem(mediaItem)
 
+        val secondMediaItem = MediaItem.fromUri(getString(AUDIO_URL))
+        player?.addMediaItem(secondMediaItem) // Creating Playlist by adding a second item
+
         player?.playWhenReady = playWhenReady
         player?.seekTo(currentWindow, playbackPosition)
         player?.prepare()
