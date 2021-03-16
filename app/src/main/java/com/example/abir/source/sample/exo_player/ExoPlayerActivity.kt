@@ -12,10 +12,19 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.util.Util
 
+/**
+ * Links to follow
+ * Code Lab - https://developer.android.com/codelabs/exoplayer-intro#0
+ * Documentation - https://exoplayer.dev/hello-world.html
+ * Github - https://github.com/google/ExoPlayer
+ */
 class ExoPlayerActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "ExoPlayerActivity"
+        private const val VIDEO_URL = R.string.media_url_mp4
+        private const val AUDIO_URL = R.string.media_url_mp3
+        private const val AUDIO_URL_2 = R.string.media_url_mp3_v2
     }
 
     private lateinit var binding: ActivityExoPlayerBinding
@@ -99,7 +108,7 @@ class ExoPlayerActivity : AppCompatActivity() {
         player = SimpleExoPlayer.Builder(this).build()
         binding.exoPlayerView.player = player
 
-        val mediaItem = MediaItem.fromUri(getString(R.string.media_url_mp3_v2))
+        val mediaItem = MediaItem.fromUri(getString(VIDEO_URL))
         player?.setMediaItem(mediaItem)
 
         player?.playWhenReady = playWhenReady
@@ -123,7 +132,7 @@ class ExoPlayerActivity : AppCompatActivity() {
             player = null
             "releasePlayer() resources released".logWarn(TAG)
         } ?: run {
-            "releasePlayer() player Null".logError(TAG)
+            "releasePlayer() player null".logError(TAG)
         }
     }
 }
