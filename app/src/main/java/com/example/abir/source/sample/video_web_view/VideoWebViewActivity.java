@@ -40,6 +40,7 @@ public class VideoWebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_web_view);
+        // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR); // Support both Portrait and Landscape
 
         // Save the web view
         webView = findViewById(R.id.webView);
