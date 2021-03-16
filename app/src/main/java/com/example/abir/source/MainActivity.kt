@@ -8,6 +8,7 @@ import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
 import com.example.abir.source.sample.dialog.CardDialog
+import com.example.abir.source.sample.exo_player.ExoPlayerActivity
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.jwt_token_example.JWTSample
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         setButton8()
         setButton9()
         setButton10()
+        setButton11()
     }
 
     private fun setButton1() {
@@ -138,6 +140,14 @@ class MainActivity : AppCompatActivity() {
     private fun setButton10() {
         button10.setOnClickListener {
             prepareCustomTab("https://stackoverflow.com")
+        }
+    }
+
+    private fun setButton11() {
+        button11.setOnClickListener {
+            Intent(this, ExoPlayerActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 }

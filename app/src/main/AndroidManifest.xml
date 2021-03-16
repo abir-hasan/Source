@@ -3,7 +3,6 @@
     package="com.example.abir.source">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
@@ -34,6 +33,7 @@
             android:name=".sample.video_web_view.VideoWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true" />
+        <activity android:name=".sample.exo_player.ExoPlayerActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
