@@ -7,8 +7,11 @@ import com.example.abir.source.R
 import com.example.abir.source.databinding.ActivityExoPlayerBinding
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logError
+import com.example.abir.source.utils.logVerbose
 import com.example.abir.source.utils.logWarn
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.util.MimeTypes
@@ -19,6 +22,9 @@ import com.google.android.exoplayer2.util.Util
  * Code Lab - https://developer.android.com/codelabs/exoplayer-intro#0
  * Documentation - https://exoplayer.dev/hello-world.html
  * Github - https://github.com/google/ExoPlayer
+ *
+ * It's pretty small library, having a shrunken footprint of about 70-to-300 kB depending on
+ * the included features and supported formats.
  */
 class ExoPlayerActivity : AppCompatActivity() {
 
@@ -33,6 +39,7 @@ class ExoPlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExoPlayerBinding
 
     private var player: SimpleExoPlayer? = null
+    private var playbackStateListener: PlaybackStateListener? = null
 
     private var playWhenReady: Boolean = true // Play-Pause State
     private var currentWindow: Int = 0 // Current window index
@@ -42,6 +49,7 @@ class ExoPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityExoPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        playbackStateListener = PlaybackStateListener()
     }
 
     override fun onStart() {
@@ -121,6 +129,7 @@ class ExoPlayerActivity : AppCompatActivity() {
 
         player?.playWhenReady = playWhenReady
         player?.seekTo(currentWindow, playbackPosition)
+        playbackStateListener?.let { player?.addListener(it) }
         player?.prepare()
     }
 
@@ -178,6 +187,7 @@ class ExoPlayerActivity : AppCompatActivity() {
 
         player?.playWhenReady = playWhenReady
         player?.seekTo(currentWindow, playbackPosition)
+        playbackStateListener?.let { player?.addListener(it) }
         player?.prepare()
     }
 
@@ -193,11 +203,38 @@ class ExoPlayerActivity : AppCompatActivity() {
             playWhenReady = it.playWhenReady
             playbackPosition = it.currentPosition
             currentWindow = it.currentWindowIndex
+            playbackStateListener?.let { listener -> player?.removeListener(listener) }
             it.release()
             player = null
             "releasePlayer() resources released".logWarn(TAG)
         } ?: run {
             "releasePlayer() player null".logError(TAG)
+        }
+    }
+
+    private inner class PlaybackStateListener : Player.EventListener {
+
+        override fun onPlaybackStateChanged(state: Int) {
+            var stateString = ""
+            when (state) {
+                ExoPlayer.STATE_BUFFERING -> {
+                    stateString = "ExoPlayer.STATE_BUFFERING"
+                    // Can Add Loader
+                }
+                ExoPlayer.STATE_ENDED -> {
+                    stateString = "ExoPlayer.STATE_ENDED"
+                    // Media ended
+                }
+                ExoPlayer.STATE_IDLE -> {
+                    stateString = "ExoPlayer.STATE_IDLE"
+                    // Instantiated but not yet been prepared
+                }
+                ExoPlayer.STATE_READY -> {
+                    stateString = "ExoPlayer.STATE_READY"
+                    // Remove Loader. Media is playing
+                }
+            }
+            "onPlaybackStateChanged() state = $stateString".logVerbose(TAG)
         }
     }
 }
