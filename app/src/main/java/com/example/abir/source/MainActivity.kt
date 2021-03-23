@@ -8,6 +8,7 @@ import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
 import com.example.abir.source.sample.dialog.CardDialog
+import com.example.abir.source.sample.dialog_on_full_screen.CustomScreenDialog
 import com.example.abir.source.sample.exo_player.ExoPlayerActivity
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         setButton9()
         setButton10()
         setButton11()
+        setButton12()
     }
 
     private fun setButton1() {
@@ -150,4 +152,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setButton12() {
+        button12.setOnClickListener {
+            val dialog = CustomScreenDialog()
+            dialog.show(supportFragmentManager, "tag")
+        }
+    }
+
 }
