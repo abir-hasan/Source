@@ -3,6 +3,11 @@
 package com.example.abir.source.utils
 
 import android.app.Activity
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -110,6 +115,35 @@ fun String.getDaysInterval(): String {
     } catch (e: Exception) {
         e.printStackTrace()
         ""
+    }
+}
+
+// 1 means wifi
+// 2 means mobile data
+// 0 means no network
+fun Context.checkNetworkStatus(): Int {
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+            ?: return 0
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val network: Network? = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+            ?: return 0
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> 1
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> 2
+            else -> 0
+        }
+    } else {
+        connectivityManager.activeNetworkInfo?.let {
+            return when (it.type) {
+                ConnectivityManager.TYPE_WIFI -> 1
+                ConnectivityManager.TYPE_MOBILE -> 2
+                else -> 0
+            }
+        } ?: run {
+            return 0
+        }
     }
 }
 
