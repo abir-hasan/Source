@@ -2,8 +2,8 @@ package com.example.abir.source
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
@@ -22,7 +22,7 @@ import com.example.abir.source.utils.showSnackBarShort
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
@@ -43,6 +43,16 @@ class MainActivity : AppCompatActivity() {
         setButton10()
         setButton11()
         setButton12()
+    }
+
+    override fun onNetworkStatusChange(isOnline: Boolean) {
+        super.onNetworkStatusChange(isOnline)
+        if (tvInternetStatus == null) return
+        if (isOnline) {
+            tvInternetStatus.visibility = View.GONE
+        } else {
+            tvInternetStatus.visibility = View.VISIBLE
+        }
     }
 
     private fun setButton1() {
