@@ -112,11 +112,20 @@ class MainActivity : BaseActivity() {
     /**
      * Check AES Encryption - Basic Implementation
      */
-    private fun setButton6() {
+   /* private fun setButton6() {
         button6.setOnClickListener {
             val encryptedMessage = AESEncryption().encryptMessage("01533337777")
             "onCreate() encrypted message: $encryptedMessage".logDebug(TAG)
             "onCreate() Decrypted message: ${AESEncryption().decryptMessage(encryptedMessage)}"
+                .logInfo(TAG)
+            Toast.makeText(this, "Check LOG_CAT", Toast.LENGTH_SHORT).show()
+        }
+    }*/
+    private fun setButton6() {
+        button6.setOnClickListener {
+            val encryptedMessage = AESEncryption().encryptMessageWithCBCMethod("01833337777_Name_robi")
+            "onCreate() encrypted message: $encryptedMessage".logDebug(TAG)
+            "onCreate() Decrypted message: ${AESEncryption().decryptMessageWithCBCMethod(encryptedMessage)}"
                 .logInfo(TAG)
             Toast.makeText(this, "Check LOG_CAT", Toast.LENGTH_SHORT).show()
         }
