@@ -55,7 +55,7 @@ class AESEncryption {
         val initVector = ByteArray(16) // required for CBC
         cipher.init(Cipher.DECRYPT_MODE, sKeySpec, IvParameterSpec(initVector))
 
-        val encryptedBytes: ByteArray = Base64.decode(textToDecrypt, Base64.DEFAULT)
+        val encryptedBytes: ByteArray = Base64.decode(textToDecrypt, Base64.URL_SAFE)
         val decrypted: ByteArray = cipher.doFinal(encryptedBytes)
         return String(decrypted, charsetUtf8)
     }
@@ -70,6 +70,6 @@ class AESEncryption {
         cipher.init(Cipher.ENCRYPT_MODE, sKeySpec, IvParameterSpec(initVector))
 
         val encrypted = cipher.doFinal(fileData)
-        return Base64.encodeToString(encrypted, Base64.DEFAULT)
+        return Base64.encodeToString(encrypted, Base64.URL_SAFE)
     }
 }
