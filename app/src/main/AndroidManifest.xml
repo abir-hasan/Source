@@ -46,4 +46,11 @@
         </provider>
     </application>
 
+    <queries>
+        <!-- Explicit apps you know in advance about -->
+        <!-- This is required for Android 11 and up -->
+        <package android:name="com.facebook.orca"/>
+        <package android:name="com.facebook.mlite"/>
+    </queries>
+
 </manifest>
