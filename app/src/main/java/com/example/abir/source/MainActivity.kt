@@ -14,6 +14,7 @@ import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivit
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.jwt_token_example.JWTSample
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
+import com.example.abir.source.sample.range_seek_bar.RangeSeekBarTestActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
 import com.example.abir.source.sample.video_web_view.VideoWebViewActivity
 import com.example.abir.source.utils.logDebug
@@ -43,6 +44,7 @@ class MainActivity : BaseActivity() {
         setButton10()
         setButton11()
         setButton12()
+        setButton13()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -116,7 +118,11 @@ class MainActivity : BaseActivity() {
         button6.setOnClickListener {
             val encryptedMessage = AESEncryption().encryptMessageWithCBCMethod("01533337777_xyz")
             "onCreate() encrypted message: $encryptedMessage".logDebug(TAG)
-            "onCreate() Decrypted message: ${AESEncryption().decryptMessageWithCBCMethod(encryptedMessage)}"
+            "onCreate() Decrypted message: ${
+                AESEncryption().decryptMessageWithCBCMethod(
+                    encryptedMessage
+                )
+            }"
                 .logInfo(TAG)
             Toast.makeText(this, "Check LOG_CAT", Toast.LENGTH_SHORT).show()
         }
@@ -167,6 +173,14 @@ class MainActivity : BaseActivity() {
         button12.setOnClickListener {
             val dialog = CustomScreenDialog()
             dialog.show(supportFragmentManager, "tag")
+        }
+    }
+
+    private fun setButton13() {
+        button13.setOnClickListener {
+            Intent(this, RangeSeekBarTestActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 

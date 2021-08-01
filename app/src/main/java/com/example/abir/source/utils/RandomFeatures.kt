@@ -9,6 +9,8 @@ import com.example.abir.source.MainActivity
 
 fun MainActivity.openFbMessengerOfAUser(userId: String = "186202548075080") {
     try {
+            // R - 189729221039415
+            // A - 186202548075080
         val messengerUrl: String = if (
             isAppInstalled("com.facebook.orca") ||
             isAppInstalled("com.facebook.mlite")

@@ -34,6 +34,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true" />
         <activity android:name=".sample.exo_player.ExoPlayerActivity"/>
+        <activity android:name=".sample.range_seek_bar.RangeSeekBarTestActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

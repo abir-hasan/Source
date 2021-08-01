@@ -41,6 +41,17 @@
             app:layout_constraintTop_toBottomOf="@id/tvInternetStatus" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/button13"
+            style="@style/OutlineButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Range Slider Example"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button1"
             style="@style/SimpleButtonTheme"
             android:layout_width="match_parent"
@@ -49,7 +60,7 @@
             android:text="File Download Using Retrofit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/button13" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button2"
