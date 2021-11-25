@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import com.example.abir.source.MainActivity
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logError
+import com.example.abir.source.utils.logInfo
 import com.example.abir.source.utils.logWarn
 
 
@@ -42,7 +43,6 @@ fun MainActivity.findDeviceModelManufacturerAndOS() {
  */
 fun MainActivity.getCellId() {
     try {
-        "getCellId() called".logDebug(TAG)
         val telephony = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
         if (ActivityCompat.checkSelfPermission(
@@ -60,8 +60,9 @@ fun MainActivity.getCellId() {
             return
         }
         val cellLocation = telephony.allCellInfo
-        if (cellLocation != null) {  //verify if is'nt null
-            for (info in cellLocation) {    // Loop for go through Muteablelist
+        if (cellLocation != null) {
+            "getCellId() Cell Info Count: ${cellLocation.size}".logInfo(TAG)
+            for (info in cellLocation) {
                 when (info) {
                     is CellInfoGsm -> {
                         val identity: CellIdentityGsm = info.cellIdentity   //cellIdentity data
@@ -75,7 +76,7 @@ fun MainActivity.getCellId() {
                             .append("Is Active: $isActive\n")
                             .append("Cell ID: $cellId\n")
                             .append("Signal Strength: $signalStrength\n")
-                        "getCellId()\n$status".logDebug(TAG)
+                        "getCellId()\n$status".logWarn(TAG)
                     }
                     is CellInfoCdma -> {
                         val identity: CellIdentityCdma = info.cellIdentity   //cellIdentity data
@@ -88,7 +89,7 @@ fun MainActivity.getCellId() {
                             .append("Is Active: $isActive\n")
                             .append("Cell ID: $cellId\n")
                             .append("Signal Strength: $signalStrength\n")
-                        "getCellId()\n$status".logDebug(TAG)
+                        "getCellId()\n$status".logWarn(TAG)
                     }
                     is CellInfoWcdma -> {
 
