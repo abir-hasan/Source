@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.abir.source.feature_extentions.findDeviceModelManufacturerAndOS
+import com.example.abir.source.feature_extentions.getCellId
 import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
@@ -45,6 +47,7 @@ class MainActivity : BaseActivity() {
         setButton11()
         setButton12()
         setButton13()
+        setButton14()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -181,6 +184,18 @@ class MainActivity : BaseActivity() {
             Intent(this, RangeSeekBarTestActivity::class.java).apply {
                 startActivity(this)
             }
+        }
+    }
+
+    /**
+     * Find Device OS Model And Manufacturers
+     * Get Cell Id, RSSIS, SNR, Signal Strenght and other data
+     */
+    private fun setButton14() {
+        button14.setOnClickListener {
+            findDeviceModelManufacturerAndOS()
+            getCellId()
+            //showSnackBarShort("Check LOG_CAT: for Device Specifications")
         }
     }
 
