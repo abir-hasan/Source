@@ -109,7 +109,7 @@ fun MainActivity.getCellId() {
                         val isActive = info.isRegistered
 
                         val status = StringBuilder()
-                            .append("Type: WCDMA 2G-3G\n")
+                            .append("Type: WCDMA 3G\n")
                             .append("Is Active: $isActive\n")
                             .append("Cell ID: $cellId\n")
                             .append("Signal Strength: $signalStrength\n")
