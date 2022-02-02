@@ -15,6 +15,7 @@ import com.example.abir.source.sample.exo_player.ExoPlayerActivity
 import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.jwt_token_example.JWTSample
+import com.example.abir.source.sample.lottie.LottieTestActivity
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
 import com.example.abir.source.sample.range_seek_bar.RangeSeekBarTestActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
@@ -48,6 +49,7 @@ class MainActivity : BaseActivity() {
         setButton12()
         setButton13()
         setButton14()
+        setButton15()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -196,6 +198,17 @@ class MainActivity : BaseActivity() {
             findDeviceModelManufacturerAndOS()
             getCellId()
             //showSnackBarShort("Check LOG_CAT: for Device Specifications")
+        }
+    }
+
+    /**
+     * Trying Lottie Animation
+     */
+    private fun setButton15() {
+        button15.setOnClickListener {
+            Intent(this, LottieTestActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 

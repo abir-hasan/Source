@@ -194,6 +194,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button12" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button15"
+            style="@style/OutlineButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Lottie Animation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button14" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

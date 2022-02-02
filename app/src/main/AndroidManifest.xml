@@ -36,6 +36,7 @@
             android:hardwareAccelerated="true" />
         <activity android:name=".sample.exo_player.ExoPlayerActivity"/>
         <activity android:name=".sample.range_seek_bar.RangeSeekBarTestActivity"/>
+        <activity android:name=".sample.lottie.LottieTestActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
