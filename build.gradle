@@ -5,6 +5,7 @@ buildscript {
     ext.arch_lifecycle_version = '2.2.0'
     ext.lifecycle_version = '2.4.0'
     ext.core_version = '1.7.0'
+    ext.data_store_version = '1.0.0'
     ext.exo_player_version = '2.13.2'
     repositories {
         google()
