@@ -65,7 +65,7 @@ class MainActivity : BaseActivity() {
 
     private fun setButton1() {
         button1.setOnClickListener {
-            Intent(this, DataStoreDemoActivity::class.java).apply {
+            Intent(this, FileDownloadActivity::class.java).apply {
                 startActivity(this)
             }
         }
@@ -208,6 +208,14 @@ class MainActivity : BaseActivity() {
     private fun setButton15() {
         button15.setOnClickListener {
             Intent(this, LottieTestActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+    }
+
+    private fun setButton16() {
+        button16.setOnClickListener {
+            Intent(this, DataStoreDemoActivity::class.java).apply {
                 startActivity(this)
             }
         }
