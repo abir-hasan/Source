@@ -51,6 +51,7 @@ class MainActivity : BaseActivity() {
         setButton13()
         setButton14()
         setButton15()
+        setButton16()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -213,6 +214,10 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Jetpack Compose Data Store Library
+     * Simple Preference Data Store Demo
+     */
     private fun setButton16() {
         button16.setOnClickListener {
             Intent(this, DataStoreDemoActivity::class.java).apply {
