@@ -9,6 +9,7 @@ import com.example.abir.source.feature_extentions.getCellId
 import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
+import com.example.abir.source.sample.data_store_demo.DataStoreDemoActivity
 import com.example.abir.source.sample.dialog.CardDialog
 import com.example.abir.source.sample.dialog_on_full_screen.CustomScreenDialog
 import com.example.abir.source.sample.exo_player.ExoPlayerActivity
@@ -64,7 +65,7 @@ class MainActivity : BaseActivity() {
 
     private fun setButton1() {
         button1.setOnClickListener {
-            Intent(this, FileDownloadActivity::class.java).apply {
+            Intent(this, DataStoreDemoActivity::class.java).apply {
                 startActivity(this)
             }
         }
