@@ -39,6 +39,7 @@
         <activity android:name=".sample.range_seek_bar.RangeSeekBarTestActivity"/>
         <activity android:name=".sample.lottie.LottieTestActivity"/>
         <activity android:name=".sample.data_store_demo.DataStoreDemoActivity"/>
+        <activity android:name=".sample.coroutine_flow_demo.FlowDemoActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
