@@ -1,8 +1,10 @@
 package com.example.abir.source.sample.coroutine_flow_demo
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class FlowDemoViewModel : ViewModel() {
 
@@ -19,11 +21,21 @@ class FlowDemoViewModel : ViewModel() {
     private val _counterStateFlow = MutableStateFlow(0)
     val counterStateFlow = _counterStateFlow.asStateFlow()
 
-    private val _toastySharedFlow = MutableSharedFlow<Int>()
+    /**
+     * Won't fire on configuration change [Good to use with toast/snackbars]
+     * is a Hot Flow
+     */
+    private val _toastySharedFlow = MutableSharedFlow<String>()
     val toastySharedFlow = _toastySharedFlow.asSharedFlow()
 
     fun incrementCounter() {
         _counterStateFlow.value += 1
+    }
+
+    fun triggerSharedFlow() {
+        viewModelScope.launch {
+            _toastySharedFlow.emit("Shared Flow Triggered")
+        }
     }
 
     /**

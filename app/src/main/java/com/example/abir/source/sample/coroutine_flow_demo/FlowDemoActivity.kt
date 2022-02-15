@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.abir.source.BaseActivity
 import com.example.abir.source.databinding.ActivityFlowDemoBinding
+import com.example.abir.source.utils.showSnackBarShort
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -38,7 +39,23 @@ class FlowDemoActivity : BaseActivity() {
             startCountDown()
         }
 
+        binding.btnSharedFlow.setOnClickListener {
+            viewModel.triggerSharedFlow()
+        }
+
         observeStateFlow()
+        observeSharedFlow()
+    }
+
+    private fun observeSharedFlow() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.toastySharedFlow.collectLatest { value ->
+                    binding.tvSharedFlowValue.text = value
+                    showSnackBarShort(value)
+                }
+            }
+        }
     }
 
     private fun startCountDown() {
