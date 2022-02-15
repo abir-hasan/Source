@@ -26,4 +26,25 @@
         app:layout_constraintTop_toTopOf="@id/btnStateFlow"
         tools:text="Comparable to Live Data" />
 
+    <Button
+        android:id="@+id/btnBasicFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/flow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnStateFlow" />
+
+    <TextView
+        android:id="@+id/tvBasicFlowValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/btnBasicFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnBasicFlow"
+        app:layout_constraintTop_toTopOf="@id/btnBasicFlow"
+        tools:text="Start a countdown timer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

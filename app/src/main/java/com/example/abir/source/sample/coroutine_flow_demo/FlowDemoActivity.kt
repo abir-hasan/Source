@@ -2,10 +2,12 @@ package com.example.abir.source.sample.coroutine_flow_demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.abir.source.BaseActivity
 import com.example.abir.source.databinding.ActivityFlowDemoBinding
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,6 +34,20 @@ class FlowDemoActivity : BaseActivity() {
             viewModel.incrementCounter()
         }
 
+        binding.btnBasicFlow.setOnClickListener {
+            startCountDown()
+        }
+
+        observeStateFlow()
+    }
+
+    private fun startCountDown() {
+        launchAndCollectIn(viewModel.triggerCountDownTimer()) { time ->
+            binding.tvBasicFlowValue.text = "$time"
+        }
+    }
+
+    private fun observeStateFlow() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.counterStateFlow.collectLatest { count ->
@@ -40,11 +56,10 @@ class FlowDemoActivity : BaseActivity() {
             }
         }
 
-        // Upper Code Can Also Be Simplified Like This
+        // Code Above Can Also Be Simplified Like This
         /*launchAndCollectIn(viewModel.counterStateFlow) { count ->
             binding.tvStateFlowValue.text = "Count: $count"
         }*/
-
     }
 }
 

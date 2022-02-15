@@ -25,6 +25,7 @@
     <string name="state_flow">State Flow</string>
     <string name="flow_demo">Flow Demo</string>
     <string name="jetpack_data_store_demo">Jetpack Data Store Demo</string>
+    <string name="flow">Flow</string>
     <!--Exo player-->
 
 </resources>
