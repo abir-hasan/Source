@@ -8,6 +8,7 @@ import com.example.abir.source.feature_extentions.findDeviceModelManufacturerAnd
 import com.example.abir.source.feature_extentions.getCellId
 import com.example.abir.source.feature_extentions.prepareCustomTab
 import com.example.abir.source.sample.aes_encryption.AESEncryption
+import com.example.abir.source.sample.coroutine_flow_demo.FlowDemoActivity
 import com.example.abir.source.sample.custom_text.CustomTextSampleActivity
 import com.example.abir.source.sample.data_store_demo.DataStoreDemoActivity
 import com.example.abir.source.sample.dialog.CardDialog
@@ -52,6 +53,7 @@ class MainActivity : BaseActivity() {
         setButton14()
         setButton15()
         setButton16()
+        setButton17()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -221,6 +223,17 @@ class MainActivity : BaseActivity() {
     private fun setButton16() {
         button16.setOnClickListener {
             Intent(this, DataStoreDemoActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+    }
+
+    /**
+     * Kotlin Flow Demo
+     */
+    private fun setButton17() {
+        button17.setOnClickListener {
+            Intent(this, FlowDemoActivity::class.java).apply {
                 startActivity(this)
             }
         }

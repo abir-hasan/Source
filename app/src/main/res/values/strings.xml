@@ -22,6 +22,9 @@
     <string name="save">Save</string>
     <string name="type_your_key_to_read">Type your key to read</string>
     <string name="read">Read</string>
+    <string name="state_flow">State Flow</string>
+    <string name="flow_demo">Flow Demo</string>
+    <string name="jetpack_data_store_demo">Jetpack Data Store Demo</string>
     <!--Exo player-->
 
 </resources>
