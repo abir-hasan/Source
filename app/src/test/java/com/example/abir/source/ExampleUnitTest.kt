@@ -1,6 +1,6 @@
 package com.example.abir.source
 
-import com.example.abir.source.unit_test.Dice
+import com.example.abir.source.unit_test.example_one.Dice
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
