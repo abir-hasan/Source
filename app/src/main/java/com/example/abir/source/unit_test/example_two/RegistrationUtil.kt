@@ -15,7 +15,17 @@ object RegistrationUtil {
         userPassword: String,
         confirmedPassword: String
     ): Boolean {
-        return true
+        return if (userName.isEmpty() || userPassword.isEmpty()) {
+            false
+        } else if (userName in exisitingUsers) {
+            false
+        } else if (userPassword != confirmedPassword) {
+            false
+        } else if (userPassword.length < 6) {
+            false
+        } else {
+            return true
+        }
     }
 
 }
