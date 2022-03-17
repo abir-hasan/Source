@@ -18,6 +18,7 @@ import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivit
 import com.example.abir.source.sample.guided_tutorial.GuideActivity
 import com.example.abir.source.sample.jwt_token_example.JWTSample
 import com.example.abir.source.sample.lottie.LottieTestActivity
+import com.example.abir.source.sample.paging_lib_sample_v1.ui.SearchRepositoriesActivity
 import com.example.abir.source.sample.property_animation.PropertyAnimationActivity
 import com.example.abir.source.sample.range_seek_bar.RangeSeekBarTestActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
@@ -233,7 +234,7 @@ class MainActivity : BaseActivity() {
      */
     private fun setButton17() {
         button17.setOnClickListener {
-            Intent(this, FlowDemoActivity::class.java).apply {
+            Intent(this, SearchRepositoriesActivity::class.java).apply {
                 startActivity(this)
             }
         }
