@@ -40,5 +40,4 @@ interface GithubService {
                 .create(GithubService::class.java)
         }
     }
-
 }
