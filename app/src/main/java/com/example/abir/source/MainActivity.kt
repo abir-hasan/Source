@@ -55,6 +55,7 @@ class MainActivity : BaseActivity() {
         setButton15()
         setButton16()
         setButton17()
+        setButton18()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -234,6 +235,14 @@ class MainActivity : BaseActivity() {
      */
     private fun setButton17() {
         button17.setOnClickListener {
+            Intent(this, FlowDemoActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+    }
+
+    private fun setButton18() {
+        button18.setOnClickListener {
             Intent(this, SearchRepositoriesActivity::class.java).apply {
                 startActivity(this)
             }
