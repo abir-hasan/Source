@@ -23,6 +23,7 @@ import com.example.abir.source.sample.property_animation.PropertyAnimationActivi
 import com.example.abir.source.sample.range_seek_bar.RangeSeekBarTestActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
 import com.example.abir.source.sample.video_web_view.VideoWebViewActivity
+import com.example.abir.source.sample.work_manager_sample.BlurActivity
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logInfo
 import com.example.abir.source.utils.showSnackBarShort
@@ -56,6 +57,7 @@ class MainActivity : BaseActivity() {
         setButton16()
         setButton17()
         setButton18()
+        setButton19()
     }
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
@@ -244,6 +246,14 @@ class MainActivity : BaseActivity() {
     private fun setButton18() {
         button18.setOnClickListener {
             Intent(this, SearchRepositoriesActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+    }
+
+    private fun setButton19() {
+        button19.setOnClickListener {
+            Intent(this, BlurActivity::class.java).apply {
                 startActivity(this)
             }
         }

@@ -238,6 +238,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button17" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button19"
+            style="@style/OutlineButtonTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/work_manager_sample"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button18" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
