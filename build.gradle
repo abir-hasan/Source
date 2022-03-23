@@ -9,6 +9,7 @@ buildscript {
     ext.exo_player_version = '2.13.2'
     ext.room_version = '2.4.1'
     ext.pagingVersion = '3.1.1'
+    ext.work_manager = '2.7.1'
     repositories {
         google()
         jcenter()

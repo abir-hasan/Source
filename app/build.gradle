@@ -87,6 +87,8 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
     // Paging Library 3
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    // WorkManager dependency
+    implementation "androidx.work:work-runtime-ktx:$work_manager"
 
     // Kotlin + Co-routines
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
