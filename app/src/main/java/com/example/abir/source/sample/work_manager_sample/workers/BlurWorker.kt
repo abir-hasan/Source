@@ -23,6 +23,10 @@ class BlurWorker(context: Context, params: WorkerParameters) : Worker(context, p
 
         makeStatusNotification("Blurring image", appContext)
 
+        // ADD THIS TO SLOW DOWN THE WORKER
+        sleep()
+        // ^^^^
+
         return try {
             // REMOVE THIS
             //    val picture = BitmapFactory.decodeResource(
