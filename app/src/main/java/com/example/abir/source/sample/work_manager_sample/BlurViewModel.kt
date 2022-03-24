@@ -22,10 +22,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.example.abir.source.R
 import com.example.abir.source.sample.work_manager_sample.workers.BlurWorker
 import com.example.abir.source.sample.work_manager_sample.workers.CleanupWorker
@@ -49,7 +46,12 @@ class BlurViewModel(application: Application) : ViewModel() {
      */
     internal fun applyBlur(blurLevel: Int) {
         // Add WorkRequest to Cleanup temporary images
-        var continuation = workmanager.beginWith(
+        /*var continuation = workmanager.beginWith(
+            OneTimeWorkRequest.from(CleanupWorker::class.java)
+        )*/
+        var continuation = workmanager.beginUniqueWork(
+            IMAGE_MANIPULATION_WORK_NAME,
+            ExistingWorkPolicy.REPLACE, // because if the user decides to blur another image before the current one is finished, we want to stop the current one and start blurring the new image.
             OneTimeWorkRequest.from(CleanupWorker::class.java)
         )
 
