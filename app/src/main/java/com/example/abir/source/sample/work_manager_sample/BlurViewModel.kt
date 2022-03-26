@@ -85,6 +85,10 @@ class BlurViewModel(application: Application) : ViewModel() {
         continuation.enqueue() // Start the chain work
     }
 
+    internal fun cancelWork() {
+        workmanager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
+    }
+
     /**
      * Creates the input data bundle which includes the Uri to operate on
      * @return Data which contains the Image Uri as a String
