@@ -15,7 +15,6 @@
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -99,9 +98,12 @@
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     style="@android:style/Widget.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:progress="0"
                     android:visibility="gone" />
             </LinearLayout>
@@ -117,8 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/see_file"
-                android:visibility="gone"
-                tools:visibility="visible" />
+                android:visibility="gone" />
 
         </LinearLayout>
 
