@@ -8,6 +8,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.example.abir.source.sample.work_manager_sample.KEY_IMAGE_URI
+import com.example.abir.source.sample.work_manager_sample.PROGRESS
 import com.example.abir.source.utils.logError
 
 class BlurWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
@@ -24,8 +25,12 @@ class BlurWorker(context: Context, params: WorkerParameters) : Worker(context, p
         makeStatusNotification("Blurring image", appContext)
 
         // ADD THIS TO SLOW DOWN THE WORKER
-        sleep()
-        // ^^^^
+        //sleep()
+        (1..100 step 10).forEach {
+            setProgressAsync(workDataOf(PROGRESS to it))
+            sleep()
+        }
+
 
         return try {
             // REMOVE THIS

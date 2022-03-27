@@ -27,6 +27,7 @@ import com.example.abir.source.R
 import com.example.abir.source.databinding.ActivityBlurBinding
 import com.example.abir.source.utils.logError
 import com.example.abir.source.utils.logVerbose
+import com.example.abir.source.utils.logWarn
 
 
 /**
@@ -65,6 +66,23 @@ class BlurActivity : AppCompatActivity() {
 
         // Observe work status, added in onCreate()
         viewModel.outputWorkInfos.observe(this, workInfosObserver())
+        viewModel.progressWorkInfoItems.observe(this, progressObserver())
+    }
+
+    private fun progressObserver(): Observer<List<WorkInfo>> {
+        return Observer { listOfWorkInfo ->
+            "progressObserver() infoSize: ${listOfWorkInfo.size}".logWarn("TAG_1")
+            if (listOfWorkInfo.isNullOrEmpty()) return@Observer
+
+            listOfWorkInfo.forEach { workInfo ->
+                if (workInfo.state == WorkInfo.State.RUNNING) {
+                    val progress = workInfo.progress.getInt(PROGRESS, 0)
+                    "progressObserver() progress $progress".logVerbose("TAG_1")
+                    binding.progressBar.progress = progress
+                }
+            }
+
+        }
     }
 
     // Define the observer function
@@ -122,6 +140,7 @@ class BlurActivity : AppCompatActivity() {
             progressBar.visibility = View.GONE
             cancelButton.visibility = View.GONE
             goButton.visibility = View.VISIBLE
+            progressBar.progress = 0
         }
     }
 

@@ -38,12 +38,14 @@ class BlurViewModel(application: Application) : ViewModel() {
     private val workmanager = WorkManager.getInstance(application)
 
     internal val outputWorkInfos: LiveData<List<WorkInfo>>
+    internal val progressWorkInfoItems : LiveData<List<WorkInfo>>
 
     init {
         imageUri = getImageUri(application.applicationContext)
         // This transformation makes sure that whenever the current work Id changes the WorkInfo
         // the UI is listening to changes
         outputWorkInfos = workmanager.getWorkInfosByTagLiveData(TAG_OUTPUT)
+        progressWorkInfoItems = workmanager.getWorkInfosByTagLiveData(TAG_PROGRESS)
     }
 
     /**
@@ -71,12 +73,20 @@ class BlurViewModel(application: Application) : ViewModel() {
                 blurBuilder.setInputData(createInputDataForUri())
             }
 
+            blurBuilder.addTag(TAG_PROGRESS) // <-- ADD THIS
             continuation = continuation.then(blurBuilder.build())
         }
+
+        // Create charging constraint
+        val constraints = Constraints.Builder()
+            .setRequiresStorageNotLow(true)
+            .build()
+
 
         // Add WorkRequest to save the image to the filesystem
         val saveRequest = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
             .addTag(TAG_OUTPUT)
+            .setConstraints(constraints)
             .build()
 
         continuation = continuation.then(saveRequest)
