@@ -12,16 +12,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.abir.source.R
+import com.example.abir.source.databinding.ActivityDownloadAndSaveFileBinding
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.model.APIResponse
 import com.example.abir.source.utils.model.Status
-import kotlinx.android.synthetic.main.activity_download_and_save_file.*
 
 class DownloadAndSaveFileActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "DownloadAndSaveFileActi"
     }
+
+    private lateinit var binding: ActivityDownloadAndSaveFileBinding
 
     private val mViewModel: DownloadAndSaveFileViewModel by lazy {
         ViewModelProvider(this).get(DownloadAndSaveFileViewModel::class.java)
@@ -34,7 +36,8 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_download_and_save_file)
+        binding = ActivityDownloadAndSaveFileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initView()
         setupObservers()
         // TODO - Take Runtime Permission
@@ -43,7 +46,7 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        btnOpenFile.setOnClickListener {
+        binding.btnOpenFile.setOnClickListener {
             if (filePathUri == null) {
                 Toast.makeText(this, getString(R.string.no_uri), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -89,7 +92,7 @@ class DownloadAndSaveFileActivity : AppCompatActivity() {
     private fun onFileUriResponse(response: APIResponse<Uri>) {
         when (response.status) {
             Status.SUCCESS -> {
-                btnOpenFile.visibility = View.VISIBLE
+                binding.btnOpenFile.visibility = View.VISIBLE
                 filePathUri = response.data
                 Toast.makeText(this, getString(R.string.success), Toast.LENGTH_SHORT).show()
             }

@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.abir.source.R
-import kotlinx.android.synthetic.main.dialog_card.*
+import com.example.abir.source.databinding.DialogCardBinding
 
 
 class CardDialog() : DialogFragment() {
+
+    private var _binding: DialogCardBinding? = null
+
+    private val binding: DialogCardBinding
+        get() = _binding!!
 
     private lateinit var message: String
 
@@ -37,8 +41,14 @@ class CardDialog() : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialog_card, container, false)
+    ): View {
+        _binding = DialogCardBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,24 +64,24 @@ class CardDialog() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvMessage.text = message
+        binding.tvMessage.text = message
 
         buttonText?.let {
-            tvActionButton.text = buttonText
+            binding.tvActionButton.text = buttonText
         } ?: run {
-            tvActionButton.visibility = View.GONE
+            binding.tvActionButton.visibility = View.GONE
         }
 
-        tvActionButton.setOnClickListener {
+        binding.tvActionButton.setOnClickListener {
             dismiss()
             onButtonClick?.invoke()
         }
 
-        ivCross.setOnClickListener {
+        binding.ivCross.setOnClickListener {
             dismiss()
             onCrossClick?.invoke()
         }
 
-        iconId?.let { ivIcon.setImageResource(it) }
+        iconId?.let { binding.ivIcon.setImageResource(it) }
     }
 }

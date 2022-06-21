@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.abir.source.R
-import kotlinx.android.synthetic.main.activity_guide_in_side_list.*
+import com.example.abir.source.databinding.ActivityGuideInSideListBinding
 import tourguide.tourguide.Overlay
 import tourguide.tourguide.Pointer
 import tourguide.tourguide.TourGuide
 
 class GuideInSideListActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityGuideInSideListBinding
 
     private lateinit var enterAnimation: AlphaAnimation
 
@@ -30,19 +32,20 @@ class GuideInSideListActivity : AppCompatActivity() {
     }
 
     private val mAdapter: GuideItemAdapter by lazy {
-        GuideItemAdapter(mLayoutManager, rvGuide)
+        GuideItemAdapter(mLayoutManager, binding.rvGuide)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_guide_in_side_list)
+        binding = ActivityGuideInSideListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setUpAnimation()
         initializeTourGuide()
         setUpListView()
     }
 
     private fun setUpListView() {
-        with(rvGuide) {
+        with(binding.rvGuide) {
             layoutManager = mLayoutManager
             adapter = mAdapter
         }
@@ -82,7 +85,7 @@ class GuideInSideListActivity : AppCompatActivity() {
                 mOnClickListener = View.OnClickListener { handleNextGuideClick() }
                 gravity { Gravity.BOTTOM or Gravity.CENTER }
             }
-        }.playOn(rvGuide)
+        }.playOn(binding.rvGuide)
     }
 
     private fun handleNextGuideClick() {

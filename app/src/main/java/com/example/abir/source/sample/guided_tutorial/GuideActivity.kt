@@ -6,13 +6,13 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
-import com.example.abir.source.R
-import com.example.abir.source.sample.file_download_retrofit.FileDownloadActivity
-import kotlinx.android.synthetic.main.activity_guide.*
+import com.example.abir.source.databinding.ActivityGuideBinding
 import tourguide.tourguide.Pointer
 import tourguide.tourguide.TourGuide
 
 class GuideActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityGuideBinding
 
     private lateinit var enterAnimation: AlphaAnimation
 
@@ -25,7 +25,8 @@ class GuideActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_guide)
+        binding = ActivityGuideBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setUpAnimation()
         initializeTourGuide()
     }
@@ -50,7 +51,7 @@ class GuideActivity : AppCompatActivity() {
         }
         setUpButtonClicks()
         anotherTourGuideWithToolTipToSkipAll()
-        tourGuide.playOn(btnOne)
+        tourGuide.playOn(binding.btnOne)
     }
 
     private fun anotherTourGuideWithToolTipToSkipAll() {
@@ -63,11 +64,11 @@ class GuideActivity : AppCompatActivity() {
                 }
                 gravity { Gravity.TOP or Gravity.CENTER }
             }
-        }.playOn(btnThree)
+        }.playOn(binding.btnThree)
     }
 
     private fun setUpButtonClicks() {
-        btnOne.setOnClickListener {
+        binding.btnOne.setOnClickListener {
             tourGuide.apply {
                 cleanUp()
                 toolTip {
@@ -75,11 +76,11 @@ class GuideActivity : AppCompatActivity() {
                     description { "Just the middle man" }
                     gravity { Gravity.BOTTOM or Gravity.LEFT }
                 }
-            }.playOn(btnTwo)
+            }.playOn(binding.btnTwo)
         }
 
         /* setup 2nd button, when clicked, cleanUp() and re-run TourGuide on button3 */
-        btnTwo.setOnClickListener {
+        binding.btnTwo.setOnClickListener {
             tourGuide.apply {
                 cleanUp()
                 toolTip {
@@ -87,11 +88,11 @@ class GuideActivity : AppCompatActivity() {
                     description { "It's time to say goodbye" }
                     gravity { Gravity.TOP or Gravity.RIGHT }
                 }
-            }.playOn(btnThree)
+            }.playOn(binding.btnThree)
         }
 
         /* setup 3rd button, when clicked, run cleanUp() */
-        btnThree.setOnClickListener {
+        binding.btnThree.setOnClickListener {
             tourGuide.cleanUp()
             Intent(this, GuideInSideListActivity::class.java).apply {
                 startActivity(this)

@@ -7,9 +7,8 @@ import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import com.example.abir.source.R
+import com.example.abir.source.databinding.ActivityPropertyAnimationBinding
 import com.example.abir.source.utils.logDebug
-import kotlinx.android.synthetic.main.activity_property_animation.*
 
 
 /**
@@ -34,21 +33,24 @@ class PropertyAnimationActivity : AppCompatActivity() {
         private const val SEARCH_ANIMATION_DURATION = 1000L
     }
 
+    private lateinit var binding: ActivityPropertyAnimationBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_property_animation)
+        binding = ActivityPropertyAnimationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        tvHello.setOnClickListener { multiplePropertyAnimationsOnSingleView() }
+        binding.tvHello.setOnClickListener { multiplePropertyAnimationsOnSingleView() }
 
-        btn1.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
-        btn2.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
+        binding.btn1.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
+        binding.btn2.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
 
-        ivSearch.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
-        ivCancel.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
-        etSearch.isClickable = false
-        etSearch.isFocusable = false
-        ivCancel.isClickable = false
-        ivCancel.isFocusable = false
+        binding.ivSearch.setOnClickListener { multiplePropertyAnimationsOnShowSearch() }
+        binding.ivCancel.setOnClickListener { multiplePropertyAnimationsOnHideSearch() }
+        binding.etSearch.isClickable = false
+        binding.etSearch.isFocusable = false
+        binding.ivCancel.isClickable = false
+        binding.ivCancel.isFocusable = false
 
         propertyAnimationWithValueAnimator()
         propertyAnimationWithObjectAnimator()
@@ -60,7 +62,7 @@ class PropertyAnimationActivity : AppCompatActivity() {
      */
     private fun propertyAnimationWithObjectAnimator() {
         val objectAnimator: ObjectAnimator = ObjectAnimator.ofFloat(
-            btn2, "translationY", 0f, -500f
+            binding.btn2, "translationY", 0f, -500f
         )
         objectAnimator.duration = 2000
         objectAnimator.interpolator = AccelerateDecelerateInterpolator()
@@ -74,7 +76,7 @@ class PropertyAnimationActivity : AppCompatActivity() {
 
         valueAnimator.duration = 2000
         valueAnimator.addUpdateListener { animation ->
-            btn1.translationY = animation.animatedValue.toString().toFloat()
+            binding.btn1.translationY = animation.animatedValue.toString().toFloat()
         }
         valueAnimator.start()
     }
@@ -87,34 +89,36 @@ class PropertyAnimationActivity : AppCompatActivity() {
         val displayMetrics = resources.displayMetrics
 
         val positionOnScreen = IntArray(2)
-        tvHello.getLocationOnScreen(positionOnScreen)
+        binding.tvHello.getLocationOnScreen(positionOnScreen)
         val currentXPositionOnScreen = positionOnScreen[0]
 
         val bringToCenterPosition = 0f
         val pixelsToGoLeft = (-currentXPositionOnScreen).toFloat()
         val pixelsToGoRight =
-            (displayMetrics.widthPixels - currentXPositionOnScreen - tvHello.width).toFloat()
+            (displayMetrics.widthPixels - currentXPositionOnScreen - binding.tvHello.width).toFloat()
 
-        val goLeftAnimation = ObjectAnimator.ofFloat(tvHello, "translationX", pixelsToGoLeft)
+        val goLeftAnimation =
+            ObjectAnimator.ofFloat(binding.tvHello, "translationX", pixelsToGoLeft)
         goLeftAnimation.duration = 3000
 
-        val scaleUpAnimation = ObjectAnimator.ofFloat(tvHello, "scaleX", 1.5f)
+        val scaleUpAnimation = ObjectAnimator.ofFloat(binding.tvHello, "scaleX", 1.5f)
         scaleUpAnimation.duration = 2500
 
-        val scaleBackAnimation = ObjectAnimator.ofFloat(tvHello, "scaleX", 1f)
+        val scaleBackAnimation = ObjectAnimator.ofFloat(binding.tvHello, "scaleX", 1f)
         scaleBackAnimation.duration = 1000
 
-        val goRightAnimation = ObjectAnimator.ofFloat(tvHello, "translationX", pixelsToGoRight)
+        val goRightAnimation =
+            ObjectAnimator.ofFloat(binding.tvHello, "translationX", pixelsToGoRight)
         goRightAnimation.startDelay = 500
         goRightAnimation.duration = 3000
 
-        val rightRotateAnimation = ObjectAnimator.ofFloat(tvHello, "rotation", 360f)
+        val rightRotateAnimation = ObjectAnimator.ofFloat(binding.tvHello, "rotation", 360f)
         rightRotateAnimation.startDelay = 500
         rightRotateAnimation.repeatCount = 5
         goRightAnimation.duration = 3000
 
         val bringToCenterAnimation =
-            ObjectAnimator.ofFloat(tvHello, "translationX", bringToCenterPosition)
+            ObjectAnimator.ofFloat(binding.tvHello, "translationX", bringToCenterPosition)
         bringToCenterAnimation.startDelay = 500
         bringToCenterAnimation.duration = 2000
 
@@ -146,18 +150,18 @@ class PropertyAnimationActivity : AppCompatActivity() {
      */
     private fun multiplePropertyAnimationsOnShowSearch() {
         val displayMetrics = resources.displayMetrics
-        val pixelsToGoLeft = (-(displayMetrics.widthPixels - ivSearch.width)).toFloat()
+        val pixelsToGoLeft = (-(displayMetrics.widthPixels - binding.ivSearch.width)).toFloat()
 
         val searchIconLeftAnimation =
-            ObjectAnimator.ofFloat(ivSearch, "translationX", pixelsToGoLeft)
+            ObjectAnimator.ofFloat(binding.ivSearch, "translationX", pixelsToGoLeft)
         searchIconLeftAnimation.duration = SEARCH_ANIMATION_DURATION
 
         val editTextFadeInAnimation =
-            ObjectAnimator.ofFloat(etSearch, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(binding.etSearch, "alpha", 0f, 1f)
         editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
 
         val cancelIconFadeInAnimation =
-            ObjectAnimator.ofFloat(ivCancel, "alpha", 0f, 1f)
+            ObjectAnimator.ofFloat(binding.ivCancel, "alpha", 0f, 1f)
         editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
 
         val animatorSet = AnimatorSet()
@@ -170,10 +174,10 @@ class PropertyAnimationActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(animation: Animator?) {
                 "onAnimationEnd()".logDebug(TAG)
-                etSearch.isClickable = true
-                etSearch.isFocusableInTouchMode = true
-                ivCancel.isClickable = true
-                ivCancel.isFocusable = true
+                binding.etSearch.isClickable = true
+                binding.etSearch.isFocusableInTouchMode = true
+                binding.ivCancel.isClickable = true
+                binding.ivCancel.isFocusable = true
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -194,15 +198,15 @@ class PropertyAnimationActivity : AppCompatActivity() {
      */
     private fun multiplePropertyAnimationsOnHideSearch() {
         val searchIconLeftAnimation =
-            ObjectAnimator.ofFloat(ivSearch, "translationX", 0f)
+            ObjectAnimator.ofFloat(binding.ivSearch, "translationX", 0f)
         searchIconLeftAnimation.duration = SEARCH_ANIMATION_DURATION
 
         val editTextFadeInAnimation =
-            ObjectAnimator.ofFloat(etSearch, "alpha", 1f, 0f)
+            ObjectAnimator.ofFloat(binding.etSearch, "alpha", 1f, 0f)
         editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
 
         val cancelIconFadeInAnimation =
-            ObjectAnimator.ofFloat(ivCancel, "alpha", 1f, 0f)
+            ObjectAnimator.ofFloat(binding.ivCancel, "alpha", 1f, 0f)
         editTextFadeInAnimation.duration = SEARCH_ANIMATION_DURATION
 
         val animatorSet = AnimatorSet()
@@ -215,10 +219,10 @@ class PropertyAnimationActivity : AppCompatActivity() {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                etSearch.isClickable = false
-                etSearch.isFocusable = false
-                ivCancel.isClickable = false
-                ivCancel.isFocusable = false
+                binding.etSearch.isClickable = false
+                binding.etSearch.isFocusable = false
+                binding.ivCancel.isClickable = false
+                binding.ivCancel.isFocusable = false
             }
 
             override fun onAnimationCancel(animation: Animator?) {

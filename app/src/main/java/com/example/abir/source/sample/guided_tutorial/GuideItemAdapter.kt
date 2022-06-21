@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.abir.source.R
-import kotlinx.android.synthetic.main.adapter_guide_item.view.*
+import com.example.abir.source.databinding.AdapterGuideItemBinding
 import tourguide.tourguide.TourGuide
 
 class GuideItemAdapter(
@@ -28,8 +28,8 @@ class GuideItemAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.adapter_guide_item, parent, false)
+        val view = AdapterGuideItemBinding
+            .inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
@@ -42,10 +42,11 @@ class GuideItemAdapter(
         holder.itemView.tag = position // Add tag to find view for
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(private val binding: AdapterGuideItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
-            itemView.setOnClickListener { }
+            binding.root.setOnClickListener { }
         }
 
         fun onBind(position: Int) {
@@ -54,8 +55,8 @@ class GuideItemAdapter(
             } else {
                 ContextCompat.getDrawable(itemView.context, R.drawable.ic_money)
             }
-            itemView.ivIcon.setImageDrawable(drawableItem)
-            itemView.tvSerial.text = "$position"
+            binding.ivIcon.setImageDrawable(drawableItem)
+            binding.tvSerial.text = "$position"
         }
     }
 

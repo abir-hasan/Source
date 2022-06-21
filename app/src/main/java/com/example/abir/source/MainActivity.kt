@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.abir.source.databinding.ActivityMainBinding
 import com.example.abir.source.feature_extentions.findDeviceModelManufacturerAndOS
 import com.example.abir.source.feature_extentions.getCellId
 import com.example.abir.source.feature_extentions.prepareCustomTab
@@ -27,10 +28,13 @@ import com.example.abir.source.sample.work_manager_sample.BlurActivity
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logInfo
 import com.example.abir.source.utils.showSnackBarShort
-import kotlinx.android.synthetic.main.activity_main.*
+
+//import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     companion object {
         private const val TAG = "MainActivity"
@@ -38,7 +42,8 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setButton1()
         setButton2()
         setButton3()
@@ -62,16 +67,16 @@ class MainActivity : BaseActivity() {
 
     override fun onNetworkStatusChange(isOnline: Boolean) {
         super.onNetworkStatusChange(isOnline)
-        if (tvInternetStatus == null) return
+        if (binding.tvInternetStatus == null) return
         if (isOnline) {
-            tvInternetStatus.visibility = View.GONE
+            binding.tvInternetStatus.visibility = View.GONE
         } else {
-            tvInternetStatus.visibility = View.VISIBLE
+            binding.tvInternetStatus.visibility = View.VISIBLE
         }
     }
 
     private fun setButton1() {
-        button1.setOnClickListener {
+        binding.button1.setOnClickListener {
             Intent(this, FileDownloadActivity::class.java).apply {
                 startActivity(this)
             }
@@ -85,7 +90,7 @@ class MainActivity : BaseActivity() {
      *  @link - https://github.com/faruktoptas/FancyShowCaseView
      */
     private fun setButton2() {
-        button2.setOnClickListener {
+        binding.button2.setOnClickListener {
             Intent(this, GuideActivity::class.java).apply {
                 startActivity(this)
             }
@@ -93,7 +98,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton3() {
-        button3.setOnClickListener {
+        binding.button3.setOnClickListener {
             Intent(this, PropertyAnimationActivity::class.java).apply {
                 startActivity(this)
             }
@@ -101,7 +106,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton4() {
-        button4.setOnClickListener {
+        binding.button4.setOnClickListener {
             Intent(this, CustomTextSampleActivity::class.java).apply {
                 startActivity(this)
             }
@@ -109,7 +114,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton5() {
-        button5.setOnClickListener {
+        binding.button5.setOnClickListener {
             val message = "Custom Title Text"
             val buttonText = "Okay"
             val fragment = CardDialog(
@@ -128,7 +133,7 @@ class MainActivity : BaseActivity() {
      * Check AES Encryption - Basic Implementation
      */
     private fun setButton6() {
-        button6.setOnClickListener {
+        binding.button6.setOnClickListener {
             val encryptedMessage = AESEncryption().encryptMessageWithCBCMethod("01533337777_xyz")
             "onCreate() encrypted message: $encryptedMessage".logDebug(TAG)
             "onCreate() Decrypted message: ${
@@ -142,7 +147,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton7() {
-        button7.setOnClickListener {
+        binding.button7.setOnClickListener {
             Intent(this, DownloadAndSaveFileActivity::class.java).apply {
                 startActivity(this)
             }
@@ -150,7 +155,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton8() {
-        button8.setOnClickListener {
+        binding.button8.setOnClickListener {
             val jwtSampleObject = JWTSample()
             val encryptedMessage = jwtSampleObject.encryptMessage("01533337777")
             "setButton8() JWT encrypted message: $encryptedMessage".logDebug(TAG)
@@ -161,7 +166,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton9() {
-        button9.setOnClickListener {
+        binding.button9.setOnClickListener {
             Intent(this, VideoWebViewActivity::class.java).apply {
                 startActivity(this)
             }
@@ -169,13 +174,13 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton10() {
-        button10.setOnClickListener {
+        binding.button10.setOnClickListener {
             prepareCustomTab("https://stackoverflow.com")
         }
     }
 
     private fun setButton11() {
-        button11.setOnClickListener {
+        binding.button11.setOnClickListener {
             Intent(this, ExoPlayerActivity::class.java).apply {
                 startActivity(this)
             }
@@ -183,14 +188,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton12() {
-        button12.setOnClickListener {
+        binding.button12.setOnClickListener {
             val dialog = CustomScreenDialog()
             dialog.show(supportFragmentManager, "tag")
         }
     }
 
     private fun setButton13() {
-        button13.setOnClickListener {
+        binding.button13.setOnClickListener {
             Intent(this, RangeSeekBarTestActivity::class.java).apply {
                 startActivity(this)
             }
@@ -202,7 +207,7 @@ class MainActivity : BaseActivity() {
      * Get Cell Id, RSSIS, SNR, Signal Strenght and other data
      */
     private fun setButton14() {
-        button14.setOnClickListener {
+        binding.button14.setOnClickListener {
             findDeviceModelManufacturerAndOS()
             getCellId()
             //showSnackBarShort("Check LOG_CAT: for Device Specifications")
@@ -213,7 +218,7 @@ class MainActivity : BaseActivity() {
      * Trying Lottie Animation
      */
     private fun setButton15() {
-        button15.setOnClickListener {
+        binding.button15.setOnClickListener {
             Intent(this, LottieTestActivity::class.java).apply {
                 startActivity(this)
             }
@@ -225,7 +230,7 @@ class MainActivity : BaseActivity() {
      * Simple Preference Data Store Demo
      */
     private fun setButton16() {
-        button16.setOnClickListener {
+        binding.button16.setOnClickListener {
             Intent(this, DataStoreDemoActivity::class.java).apply {
                 startActivity(this)
             }
@@ -236,7 +241,7 @@ class MainActivity : BaseActivity() {
      * Kotlin Flow Demo
      */
     private fun setButton17() {
-        button17.setOnClickListener {
+        binding.button17.setOnClickListener {
             Intent(this, FlowDemoActivity::class.java).apply {
                 startActivity(this)
             }
@@ -244,7 +249,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton18() {
-        button18.setOnClickListener {
+        binding.button18.setOnClickListener {
             Intent(this, SearchRepositoriesActivity::class.java).apply {
                 startActivity(this)
             }
@@ -252,7 +257,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setButton19() {
-        button19.setOnClickListener {
+        binding.button19.setOnClickListener {
             Intent(this, BlurActivity::class.java).apply {
                 startActivity(this)
             }

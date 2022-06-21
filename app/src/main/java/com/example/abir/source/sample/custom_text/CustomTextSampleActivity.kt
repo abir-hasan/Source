@@ -11,9 +11,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.abir.source.R
-import kotlinx.android.synthetic.main.activity_custom_text_sample.*
+import com.example.abir.source.databinding.ActivityCustomTextSampleBinding
 
 class CustomTextSampleActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCustomTextSampleBinding
 
     companion object {
         const val text_part_1 = "Hello, Welcome!"
@@ -23,7 +25,8 @@ class CustomTextSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_text_sample)
+        binding = ActivityCustomTextSampleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         showSpannableTextVariation()
     }
 
@@ -71,6 +74,6 @@ class CustomTextSampleActivity : AppCompatActivity() {
         builder.append(spannableString3) // Append
 
         // Setting the text
-        tvSpannableText.setText(builder, TextView.BufferType.SPANNABLE)
+        binding.tvSpannableText.setText(builder, TextView.BufferType.SPANNABLE)
     }
 }
