@@ -1,6 +1,6 @@
 package com.example.abir.source.unit_test.example_four
 
-import org.junit.Assert.assertEquals
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class EngineTest {
