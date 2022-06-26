@@ -28,6 +28,7 @@ class CarFeature {
     @Test
     fun carIsTurningOnItsEngineAndIncreasesTheTemperature() = runTest {
         car.turnOn()
+        coroutinesTestRule.testDispatcher.scheduler.advanceTimeBy(6001)
         assertEquals(95, car.engine.temperature)
         assertTrue(car.engine.isTurnedOn)
     }
