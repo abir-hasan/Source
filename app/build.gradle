@@ -65,6 +65,12 @@ android {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion '1.5.21'
     }
+
+    testOptions {
+        // So that we can print log from a method
+        // without failing them
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -106,8 +112,8 @@ dependencies {
 
     // Kotlin + Co-routines
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
@@ -156,4 +162,6 @@ dependencies {
 
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
     testImplementation "org.mockito:mockito-inline:2.21.0"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_android_version"
 }

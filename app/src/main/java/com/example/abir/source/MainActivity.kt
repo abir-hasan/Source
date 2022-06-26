@@ -25,6 +25,8 @@ import com.example.abir.source.sample.range_seek_bar.RangeSeekBarTestActivity
 import com.example.abir.source.sample.save_file_on_shared_storage.DownloadAndSaveFileActivity
 import com.example.abir.source.sample.video_web_view.VideoWebViewActivity
 import com.example.abir.source.sample.work_manager_sample.BlurActivity
+import com.example.abir.source.unit_test.example_five.Car
+import com.example.abir.source.unit_test.example_five.EngineV2
 import com.example.abir.source.utils.logDebug
 import com.example.abir.source.utils.logInfo
 import com.example.abir.source.utils.showSnackBarShort
@@ -41,6 +43,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        exampleUnitTestFive()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -262,6 +265,12 @@ class MainActivity : BaseActivity() {
                 startActivity(this)
             }
         }
+    }
+
+    private fun exampleUnitTestFive() {
+        val engine = EngineV2()
+        val car = Car(engine, 20.00)
+        car.turnOn()
     }
 
 }
